@@ -129,6 +129,19 @@ end
 write memory
 ```
 
+## 🧩 Paso 4: Configuración de los PCs (Equipos Terminales)
+
+Configura cada PC con su **dirección IP**, **máscara de subred** y **puerta de enlace (gateway)** correctas.
+
+| Dispositivo | VLAN (Grupo) | Dirección IP | Máscara de Subred | Default Gateway |
+|--------------|---------------|---------------|--------------------|-----------------|
+| Pc01 | 10 (Docentes) | 199.19.9.2 | 255.255.255.0 | 199.19.9.1 |
+| Pc02 | 10 (Docentes) | 199.19.9.3 | 255.255.255.0 | 199.19.9.1 |
+| Pc03 | 10 (Docentes) | 199.19.9.4 | 255.255.255.0 | 199.19.9.1 |
+| Pc10 | 20 (Alumnos) | 170.17.0.2 | 255.255.0.0 | 170.17.0.1 |
+| Pc11 | 20 (Alumnos) | 170.17.0.3 | 255.255.0.0 | 170.17.0.1 |
+| Pc12 | 20 (Alumnos) | 170.17.0.4 | 255.255.0.0 | 170.17.0.1 |
+
 ## ✅ Verificación
 
 La prueba final consiste en verificar la conectividad entre un PC de la VLAN 10 conectado a SW1 y un PC de la VLAN 20 conectado a SW2.
