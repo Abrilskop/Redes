@@ -64,7 +64,8 @@ interface FastEthernet0/1
 exit
 
 end
-write memory```
+write memory
+```
 
 ### 2. Configuración del Router (R01)
 
