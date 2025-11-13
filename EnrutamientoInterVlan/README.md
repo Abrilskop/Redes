@@ -10,7 +10,7 @@ El objetivo principal de este laboratorio es configurar y verificar la comunicac
 
 La topología de red implementada en Cisco Packet Tracer es la siguiente:
 
-![Topología de Red](img/topology.png)
+![Topología de Red](topology.png)
 
 *   **Router:** 1 x Cisco 2811 (R01)
 *   **Switch:** 1 x Cisco 2950T-24 (sw01)
