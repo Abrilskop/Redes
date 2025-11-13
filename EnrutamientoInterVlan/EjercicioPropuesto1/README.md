@@ -154,5 +154,3 @@ Durante la resolución de este ejercicio, se abordaron varios puntos críticos d
 4.  **Configuración del Gateway:** El error más común en la capa de usuario es olvidar o configurar incorrectamente la **Puerta de Enlace Predeterminada (Default Gateway)** en los PCs. Sin ella, la comunicación Inter-VLAN es imposible.
 
 ---
-
-_Realizado por [Tu Nombre Aquí]_
