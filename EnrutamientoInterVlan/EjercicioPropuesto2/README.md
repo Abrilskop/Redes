@@ -10,7 +10,7 @@ El requerimiento es agregar un nuevo grupo de usuarios, "Administrativos", a la 
 
 La topología se amplió para incluir cuatro nuevos PCs (PC20, PC21, PC22, PC23) conectados a los switches existentes.
 
-![Topología de Red Ampliada](img/topology_ampliada.png)
+![Topología de Red Ampliada](topology_ampliada.png)
 
 ### Esquema de Direccionamiento Final (3 VLANs)
 
