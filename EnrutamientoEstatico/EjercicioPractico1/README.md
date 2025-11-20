@@ -17,8 +17,7 @@ La arquitectura consta de dos segmentos de red separados, interconectados por un
 *   **Red B (Derecha):** `192.168.1.0/24`
 *   **Interconexión:** Router actuando como Gateway para ambas subredes.
 
-![Diagrama de Topología](assets/topologia.png)
-*(Por favor sube tu captura de pantalla a una carpeta assets y actualiza esta ruta)*
+![Diagrama de Topología](practica1.png)
 
 ## 💻 Detalles de Implementación
 
