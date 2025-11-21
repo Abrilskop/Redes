@@ -17,16 +17,16 @@ Este ejercicio implementa una infraestructura de red WAN de alta disponibilidad 
 
 ![Diagrama de Topología](topologia_final_ej2.png)
 
-## 📋 Tabla de Direccionamiento y Conexiones
+## 📋 Tabla de Direccionamiento y Puertos
 
-| Sede (Router) | PC Usuario | IP Gateway (LAN) | Interfaces WAN Activas |
-| :--- | :--- | :--- | :--- |
-| **CUSCO** | PC0 | `63.0.0.1` | Se0/1/0, Se0/0/0, Se0/0/1 |
-| **TACNA** | PC1 | `95.0.0.1` | Se0/1/0, Se0/1/1 |
-| **HUÁNUCO** | PC2 | `129.0.0.1` | Se0/1/1, Se0/0/1, Se0/0/0 |
-| **AYACUCHO** | PC3 | `200.45.26.1` | Se0/0/0, Se0/1/1, Se0/0/1 |
-| **TUMBES** | PC4 | `172.16.0.1` | Se0/1/1, Se0/1/0 |
-| **IQUITOS** | PC5 | `192.168.1.1` | Se0/0/0, Se0/1/0, Se0/0/1 |
+| Ciudad | PC | Interfaz LAN | IP Gateway | Conexiones WAN (Seriales) |
+| :--- | :--- | :--- | :--- | :--- |
+| **CUSCO** | PC0 | Fa0/0 | 63.0.0.1 | Tacna (Se0/1/0), Iquitos (Se0/0/0), Huánuco (Se0/0/1) |
+| **TACNA** | PC1 | Fa0/0 | 95.0.0.1 | Cusco (Se0/1/0), Huánuco (Se0/1/1) |
+| **HUÁNUCO** | PC2 | Fa0/0 | 129.0.0.1 | Tacna (Se0/1/1), Cusco (Se0/0/1), Ayacucho (Se0/0/0) |
+| **AYACUCHO** | PC3 | Fa0/0 | 200.45.26.1 | Huánuco (Se0/0/0), Iquitos (Se0/1/1), Tumbes (Se0/0/1) |
+| **TUMBES** | PC4 | Fa0/0 | 172.16.0.1 | Iquitos (Se0/1/0), Ayacucho (Se0/1/1) |
+| **IQUITOS** | PC5 | Fa0/0 | 192.168.1.1 | Cusco (Se0/0/0), Tumbes (Se0/1/0), Ayacucho (Se0/0/1) |
 
 ---
 
@@ -35,31 +35,25 @@ Este ejercicio implementa una infraestructura de red WAN de alta disponibilidad 
 ### 1. Router CUSCO
 ```bash
 enable
-configure terminal
+config t
 hostname Cusco
-
-! Configuración LAN (Cable Cruzado)
+! LAN (Cable Cruzado)
 interface FastEthernet0/0
  ip address 63.0.0.1 255.0.0.0
  no shutdown
-
-! Configuración WAN
+! WANs
 interface Serial0/1/0
- description Link_a_Tacna
  ip address 9.0.0.2 255.0.0.0
  no shutdown
 interface Serial0/0/0
- description Link_a_Iquitos_DCE
  ip address 4.0.0.1 255.0.0.0
  clock rate 64000
  no shutdown
 interface Serial0/0/1
- description Link_a_Huanuco_DCE
  ip address 2.0.0.1 255.0.0.0
  clock rate 64000
  no shutdown
-
-! Enrutamiento Estático
+! Rutas
 ip route 95.0.0.0 255.0.0.0 9.0.0.1
 ip route 192.168.1.0 255.255.255.0 4.0.0.2
 ip route 129.0.0.0 255.255.0.0 2.0.0.2
@@ -71,27 +65,22 @@ exit
 ### 2. Router TACNA
 ```bash
 enable
-configure terminal
+config t
 hostname Tacna
-
-! Configuración LAN
+! LAN (Cable Cruzado)
 interface FastEthernet0/0
  ip address 95.0.0.1 255.0.0.0
  no shutdown
-
-! Configuración WAN
+! WANs
 interface Serial0/1/0
- description Link_a_Cusco_DCE
  ip address 9.0.0.1 255.0.0.0
  clock rate 64000
  no shutdown
 interface Serial0/1/1
- description Link_a_Huanuco_DCE
  ip address 7.0.0.1 255.0.0.0
  clock rate 64000
  no shutdown
-
-! Enrutamiento Estático
+! Rutas
 ip route 63.0.0.0 255.0.0.0 9.0.0.2
 ip route 129.0.0.0 255.255.0.0 7.0.0.2
 ip route 192.168.1.0 255.255.255.0 9.0.0.2
@@ -103,34 +92,28 @@ exit
 ### 3. Router HUÁNUCO
 ```bash
 enable
-configure terminal
+config t
 hostname Huanuco
-
-! Configuración LAN
+! LAN (Cable Cruzado)
 interface FastEthernet0/0
  ip address 129.0.0.1 255.255.0.0
  no shutdown
-
-! Configuración WAN
+! WANs
 interface Serial0/1/1
- description Link_a_Tacna
  ip address 7.0.0.2 255.0.0.0
  no shutdown
 interface Serial0/0/1
- description Link_a_Cusco
  ip address 2.0.0.2 255.0.0.0
  no shutdown
 interface Serial0/0/0
- description Link_a_Ayacucho_DCE
  ip address 8.0.0.1 255.0.0.0
  clock rate 64000
  no shutdown
-
-! Enrutamiento Estático
+! Rutas
 ip route 95.0.0.0 255.0.0.0 7.0.0.1
 ip route 63.0.0.0 255.0.0.0 2.0.0.1
 ip route 200.45.26.0 255.255.255.0 8.0.0.2
-ip route 192.168.1.0 255.255.255.0 2.0.0.1
+ip route 192.168.1.0 255.255.255.0 8.0.0.2
 ip route 172.16.0.0 255.255.0.0 8.0.0.2
 exit
 ```
@@ -138,32 +121,26 @@ exit
 ### 4. Router AYACUCHO
 ```bash
 enable
-configure terminal
+config t
 hostname Ayacucho
-
-! Configuración LAN
+! LAN (Cable Cruzado)
 interface FastEthernet0/0
  ip address 200.45.26.1 255.255.255.0
  no shutdown
-
-! Configuración WAN
-interface Serial0/0/0
- description Link_a_Huanuco
- ip address 8.0.0.2 255.0.0.0
- no shutdown
+! WANs
 interface Serial0/1/1
- description Link_a_Iquitos
  ip address 6.0.0.2 255.0.0.0
  no shutdown
 interface Serial0/0/1
- description Link_a_Tumbes
  ip address 5.0.0.2 255.0.0.0
  no shutdown
-
-! Enrutamiento Estático
-ip route 129.0.0.0 255.255.0.0 8.0.0.1
+interface Serial0/0/0
+ ip address 8.0.0.2 255.0.0.0
+ no shutdown
+! Rutas
 ip route 192.168.1.0 255.255.255.0 6.0.0.1
 ip route 172.16.0.0 255.255.0.0 5.0.0.1
+ip route 129.0.0.0 255.255.0.0 8.0.0.1
 ip route 63.0.0.0 255.0.0.0 8.0.0.1
 ip route 95.0.0.0 255.0.0.0 8.0.0.1
 exit
@@ -172,26 +149,21 @@ exit
 ### 5. Router TUMBES
 ```bash
 enable
-configure terminal
+config t
 hostname Tumbes
-
-! Configuración LAN
+! LAN (Cable Cruzado)
 interface FastEthernet0/0
  ip address 172.16.0.1 255.255.0.0
  no shutdown
-
-! Configuración WAN
+! WANs
 interface Serial0/1/0
- description Link_a_Iquitos
  ip address 3.0.0.2 255.0.0.0
  no shutdown
 interface Serial0/1/1
- description Link_a_Ayacucho_DCE
  ip address 5.0.0.1 255.0.0.0
  clock rate 64000
  no shutdown
-
-! Enrutamiento Estático
+! Rutas
 ip route 192.168.1.0 255.255.255.0 3.0.0.1
 ip route 200.45.26.0 255.255.255.0 5.0.0.2
 ip route 63.0.0.0 255.0.0.0 3.0.0.1
@@ -203,31 +175,25 @@ exit
 ### 6. Router IQUITOS
 ```bash
 enable
-configure terminal
+config t
 hostname Iquitos
-
-! Configuración LAN
+! LAN (Cable Cruzado)
 interface FastEthernet0/0
  ip address 192.168.1.1 255.255.255.0
  no shutdown
-
-! Configuración WAN
+! WANs
 interface Serial0/0/0
- description Link_a_Cusco
  ip address 4.0.0.2 255.0.0.0
  no shutdown
 interface Serial0/1/0
- description Link_a_Tumbes_DCE
  ip address 3.0.0.1 255.0.0.0
  clock rate 64000
  no shutdown
 interface Serial0/0/1
- description Link_a_Ayacucho_DCE
  ip address 6.0.0.1 255.0.0.0
  clock rate 64000
  no shutdown
-
-! Enrutamiento Estático
+! Rutas
 ip route 63.0.0.0 255.0.0.0 4.0.0.1
 ip route 172.16.0.0 255.255.0.0 3.0.0.1
 ip route 200.45.26.0 255.255.255.0 6.0.0.1
