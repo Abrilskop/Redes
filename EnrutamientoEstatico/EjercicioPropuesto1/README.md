@@ -13,7 +13,6 @@ Se ha configurado direccionamiento IP jerárquico, interfaces seriales síncrona
 La red utiliza enlaces seriales para la WAN y FastEthernet para las LANs locales.
 
 ![Diagrama de Topología](assets/topologia_ejercicio1.png)
-*(Asegúrate de subir aquí la captura donde se ven todos los triángulos verdes)*
 
 ## 📋 Documentación de Direccionamiento IP
 
