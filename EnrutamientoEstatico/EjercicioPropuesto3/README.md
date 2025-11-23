@@ -15,7 +15,7 @@ El objetivo es lograr **conectividad total (Full Mesh)**, donde cualquier PC de 
 2.  **Capa Física (LAN):** Se utilizaron **Cables Cruzados (Crossover)** para conectar los Routers directamente a las PCs (sin Switch).
 3.  **Capa Física (WAN):** Cables Seriales DCE/DTE con `clock rate 64000`.
 
-![Diagrama de Topología](topologia_final_ej3.png)
+![Diagrama de Topología](assets/topologia_final_ej3.png)
 
 ## 📋 Tabla de Direccionamiento IP
 
