@@ -291,6 +291,36 @@ ip route 0.0.0.0 0.0.0.0 33.1.6.2
 exit
 ```
 
+## 📡 Interpretación del comando `tracert`
+
+Para comprobar la conectividad entre los distintos países de la topología, se ejecutó el comando `tracert` desde un host ubicado en la red LAN de **Perú** hacia el host de la red LAN de **Paraguay** (IP destino: `135.246.8.2`).
+
+El resultado obtenido fue el siguiente:
+
+![Resultado de Pings Exitosos0](assets/tracert1.png)
+
+### 🧭 Análisis de los saltos
+
+#### 🔹 Salto 1 — 135.246.1.1 (Gateway de Perú)
+Corresponde al *gateway* de la LAN del país Perú. Esto indica que el host local puede comunicarse correctamente con su router.
+
+#### 🔹 Salto 2 — 33.1.1.2 (Router de Bolivia)
+El segundo salto muestra la IP WAN del router Bolivia, vecino directo de Perú. Este salto confirma la comunicación a través del enlace WAN.
+
+#### 🔹 Salto 3 — 33.1.11.1 (Router de Paraguay)
+El tercer salto llega al router Paraguay. Esto demuestra que el router Bolivia reenvía correctamente los paquetes hacia Paraguay según su tabla de enrutamiento.
+
+#### 🔹 Salto 4 — 135.246.8.2 (Host de Paraguay)
+Finalmente, el cuarto salto llega a la IP destino en la LAN de Paraguay. El símbolo `*` indica que un intento no respondió a tiempo, pero no afecta la conectividad.
+
+#### ✔️ Conclusión
+El trazado de ruta confirma que la comunicación entre Perú y Paraguay es exitosa.  
+La ruta seguida por los paquetes fue:
+
+**Perú → Bolivia → Paraguay → Host destino**
+
+Esto demuestra que las subredes WAN y la configuración de enrutamiento están funcionando correctamente dentro de la topología.
+
 ## 🧪 Verificación Final (Ping)
 
 Se realizaron pruebas ICMP desde **PC0 (Perú)** hacia los nodos más distantes y complicados de la red para verificar que no existen bucles de enrutamiento.
