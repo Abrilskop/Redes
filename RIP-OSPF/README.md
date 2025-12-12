@@ -1,23 +1,23 @@
-# 🌐 Topología OSPF + RIP — Cisco Packet Tracer
+# Topología OSPF + RIP — Cisco Packet Tracer
 
 ## 1. Descripción General
 
 La topología está compuesta por **dos dominios de enrutamiento**:
 
-### 🔵 Dominio OSPF (Área 0)
+### Dominio OSPF (Área 0)
 - Routers: **R0, R1, R2**
 - Topología: Triángulo (FastEthernet)
 - Hosts:
   - **PC0** conectado a R0
   - **PC1** conectado a R1
 
-### 🟣 Dominio RIP
+### Dominio RIP
 - Routers: **R2, R3, R4**
 - Topología: Lineal (Serial)
 - Host:
   - **PC2** conectado a R4
 
-### 🔑 Router Frontera
+### Router Frontera
 - **R2** ejecuta **OSPF y RIP**
 - Realiza **redistribución entre protocolos**
 
